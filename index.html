@@ -143,49 +143,48 @@
   </div>
 </section>
 
-<!-- ===== (a) PRIOR WORK + PIPELINE ===== -->
-<a id="overview" class="anchor-gap"></a>
-<section class="section">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3 section-title">Simulation Pipeline</h2>
-    <p class="section-subtitle">Where we differ from prior art, and how our differentiable wave-optics pipeline works.</p>
+  <!-- ===== (a) PRIOR WORK + PIPELINE ===== -->
+  <a id="overview" class="anchor-gap"></a>
+  <section class="section">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 section-title">Simulation Pipeline</h2>
+      <p class="section-subtitle">Where we differ from prior art, and how our differentiable wave-optics pipeline works.</p>
 
-    <div class="columns is-variable is-6">
-      <!-- Text -->
-      <div class="column">
-        <div class="content">
-          <h3 class="title is-5">Prior approaches</h3>
-          <ul>
-            <li><strong>Ray-only end-to-end:</strong> Fast and scalable, but ignores diffraction and off-axis phase—designs can be brittle under aperture/NA changes.</li>
-            <li><strong>Paraxial / stationary PSF models:</strong> Capture limited diffraction under simplifying assumptions; accuracy degrades in compound optics and with field curvature.</li>
-            <li><strong>ASM-based propagation:</strong> Efficient in the far/near field, but accuracy becomes sensitive when wavefront phase varies rapidly due to strong aberrations or tight sampling constraints.</li>
-          </ul>
-          <p>
-            <strong>Our approach:</strong> We combine <em>aberration-aware ray tracing</em> (for precise wavefront/phase on a reference sphere) with <em>Rayleigh–Sommerfeld</em> free-space propagation for physically accurate PSFs, while retaining differentiability and off-grid sampling on the wavefront map.
-          </p>
-        </div>
-      </div>
-
-      <!-- Figure -->
-      <div class="column">
-        <div class="card elevated">
-          <div class="card-image">
-            <figure class="image is-3by2">
-              <!-- Prefer an SVG or PNG export -->
-              <img src="./static/images/pipeline.pdf" alt="Differentiable wave-optics pipeline: ray tracing to reference sphere, wavefront sampling, diffraction propagation, sensor PSF, loss, gradients." />
-            </figure>
-          </div>
-          <div class="card-content">
-            <p class="img-caption">
-              Rays from a point source <em>o</em> are traced to the reference sphere at the exit pupil (XP), yielding intersections {&rho;<sub>i</sub>} and a phase map on the wavefront. We then propagate this complex field to the sensor via Rayleigh–Sommerfeld integration to form a PSF, which feeds the image formation, loss, and gradient steps.
+      <div class="columns is-variable is-6">
+        <!-- Text -->
+        <div class="column">
+          <div class="content">
+            <h3 class="title is-5">Prior approaches</h3>
+            <ul>
+              <li><strong>Ray-only end-to-end:</strong> Fast and scalable, but ignores diffraction and off-axis phase—designs can be brittle under aperture/NA changes.</li>
+              <li><strong>Paraxial / stationary PSF models:</strong> Capture limited diffraction under simplifying assumptions; accuracy degrades in compound optics and with field curvature.</li>
+              <li><strong>ASM-based propagation:</strong> Efficient in the far/near field, but accuracy becomes sensitive when wavefront phase varies rapidly due to strong aberrations or tight sampling constraints.</li>
+            </ul>
+            <p>
+              <strong>Our approach:</strong> We combine <em>aberration-aware ray tracing</em> (for precise wavefront/phase on a reference sphere) with <em>Rayleigh–Sommerfeld</em> free-space propagation for physically accurate PSFs, while retaining differentiability and off-grid sampling on the wavefront map.
             </p>
           </div>
         </div>
-      </div>
-    </div>
 
-  </div>
-</section>
+        <!-- Figure -->
+        <div class="column">
+          <div class="card elevated">
+            <div class="card-image pipeline-figure">
+              <figure class="image">
+                <img src="./static/images/pipeline.svg" alt="Differentiable wave-optics pipeline" />
+              </figure>
+            </div>
+            <div class="card-content">
+              <p class="img-caption">
+                Rays from a point source <em>o</em> are traced to the reference sphere at the exit pupil (XP), yielding intersections {&rho;<sub>i</sub>} and a phase map on the wavefront. We then propagate this complex field to the sensor via Rayleigh–Sommerfeld integration to form a PSF, which feeds the image formation, loss, and gradient steps.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
 
 <!-- ===== (b) RESULTS: COMPETITORS VS OURS ===== -->
 <a id="results" class="anchor-gap"></a>
