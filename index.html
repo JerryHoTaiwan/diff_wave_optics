@@ -1,47 +1,54 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta name="description"
-        content="A Differentiable Wave Optics Model for End-to-End Computational Imaging System Optimization.">
-  <meta name="keywords" content="Computational Imaging, Wave Optics, Differentiable Programming">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="description" content="A Differentiable Wave Optics Model for End-to-End Computational Imaging System Optimization." />
+  <meta name="keywords" content="Computational Imaging, Wave Optics, Differentiable Programming" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>A Differentiable Wave Optics Model for End-to-End Computational Imaging System Optimization</title>
 
-  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!-- Analytics (keep/remove as you prefer) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-
-    gtag('js', new Date());
-
-    gtag('config', 'G-PYVRSFMDRL');
+    function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-PYVRSFMDRL');
   </script>
 
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
-        rel="stylesheet">
+  <!-- Fonts & CSS -->
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet" />
+  <link rel="stylesheet" href="./static/css/bulma.min.css" />
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css" />
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css" />
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" />
+  <link rel="stylesheet" href="./static/css/index.css" />
+  <link rel="icon" href="./static/images/favicon.svg" />
 
-  <link rel="stylesheet" href="./static/css/bulma.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
-  <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css">
-  <link rel="icon" href="./static/images/favicon.svg">
-
+  <!-- JS -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
+
+  <style>
+    /* Small helpers so it looks good out of the box */
+    .section-title { margin-bottom: 0.5rem; }
+    .section-subtitle { margin-top: 0; opacity: 0.8; }
+    .metric-tag { margin-right: .4rem; }
+    .img-caption { font-size: 0.9rem; opacity: 0.8; margin-top: .5rem; }
+    .video-wrapper { position: relative; padding-top: 56.25%; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,.08); }
+    .video-wrapper video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .carousel .item { text-align: center; }
+    .card.elevated { box-shadow: 0 10px 28px rgba(0,0,0,.10); border-radius: 16px; }
+    .is-narrow-text { max-width: 820px; margin: 0 auto; }
+    .hero-teaser img { border-radius: 16px; box-shadow: 0 12px 36px rgba(0,0,0,.12); }
+    .anchor-gap { scroll-margin-top: 80px; }
+  </style>
 </head>
 <body>
 
+<!-- ===== NAV ===== -->
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
@@ -51,29 +58,27 @@
     </a>
   </div>
   <div class="navbar-menu">
-    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-      <a class="navbar-item" href="https://jerryhotaiwan.github.io">
-      <span class="icon">
-          <i class="fas fa-home"></i>
-      </span>
-      </a>
-
+    <div class="navbar-start" style="flex-grow:1; justify-content:center;">
+      <a class="navbar-item" href="#top"><span class="icon"><i class="fas fa-home"></i></span></a>
+      <a class="navbar-item" href="#overview">Overview</a>
+      <a class="navbar-item" href="#results">Results</a>
+      <a class="navbar-item" href="#gallery">PSFs & Images</a>
+      <a class="navbar-item" href="#evolution">Evolving Lenses</a>
       <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
-          More Research
-        </a>
+        <a class="navbar-link">More</a>
         <div class="navbar-dropdown">
-          <a class="navbar-item" href="https://jerryhotaiwan.github.io/diff_wave_optics/">
-            DiffWaveOptics
-          </a>
+          <a class="navbar-item" href="https://jerryhotaiwan.github.io/diff_wave_optics/">DiffWaveOptics</a>
+          <a class="navbar-item" href="https://github.com/JerryHoTaiwan/DeepWaveOptics">Code</a>
+          <a class="navbar-item" href="https://arxiv.org/abs/2412.09774">Paper</a>
         </div>
       </div>
     </div>
-
   </div>
 </nav>
 
+<a id="top" class="anchor-gap"></a>
 
+<!-- ===== HERO ===== -->
 <section class="hero">
   <div class="hero-body">
     <div class="container is-max-desktop">
@@ -81,61 +86,18 @@
         <div class="column has-text-centered">
           <h1 class="title is-1 publication-title">A Differentiable Wave Optics Model for End-to-End Computational Imaging System Optimization</h1>
           <div class="is-size-5 publication-authors">
-            <span class="author-block">
-              <a href="https://jerryhotaiwan.github.io">Chi-Jui Ho</a>,</span>
-            <span class="author-block">
-              <a href="https://yashbelhe.github.io">Yash Belhe</a>,</span>
-            <span class="author-block">
-              <a href="https://cse.ucsd.edu/people/faculty-profiles/steve-rotenberg">Steve Rotenberg</a>,
-            </span>
-            <span class="author-block">
-              <a href="https://cseweb.ucsd.edu/~ravir/">Ravi Ramamoorthi</a>,
-            </span>
-            <span class="author-block">
-              <a href="https://cseweb.ucsd.edu/~tzli/">Tzu-Mao Li</a>,
-            </span>
-            <span class="author-block">
-              <a href="https://www.nickantipa.com">Nick Antipa</a>,
-            </span>
+            <span class="author-block"><a href="https://jerryhotaiwan.github.io">Chi-Jui Ho</a>, </span>
+            <span class="author-block"><a href="https://yashbelhe.github.io">Yash Belhe</a>, </span>
+            <span class="author-block"><a href="https://cse.ucsd.edu/people/faculty-profiles/steve-rotenberg">Steve Rotenberg</a>, </span>
+            <span class="author-block"><a href="https://cseweb.ucsd.edu/~ravir/">Ravi Ramamoorthi</a>, </span>
+            <span class="author-block"><a href="https://cseweb.ucsd.edu/~tzli/">Tzu-Mao Li</a>, </span>
+            <span class="author-block"><a href="https://www.nickantipa.com">Nick Antipa</a></span>
           </div>
-
-          <div class="is-size-5 publication-authors">
-            <span class="author-block">UC San Diego</span>
-          </div>
-
-          <div class="column has-text-centered">
-            <div class="publication-links">
-              <!-- PDF Link. -->
-              <span class="link-block">
-                <a href="https://arxiv.org/abs/2412.09774"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fas fa-file-pdf"></i>
-                  </span>
-                  <span>Paper</span>
-                </a>
-              </span>
-              <span class="link-block">
-                <a href="https://arxiv.org/abs/2412.09774"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="ai ai-arxiv"></i>
-                  </span>
-                  <span>arXiv</span>
-                </a>
-              </span>
-              <!-- Code Link. -->
-              <span class="link-block">
-                <a href="https://github.com/JerryHoTaiwan/DeepWaveOptics"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-github"></i>
-                  </span>
-                  <span>Code (Coming Soon)</span>
-                  </a>
-              </span>
-            </div>
-
+          <div class="is-size-5 publication-authors"><span class="author-block">UC San Diego</span></div>
+          <div class="publication-links">
+            <span class="link-block"><a href="https://arxiv.org/abs/2412.09774" class="external-link button is-normal is-rounded is-dark"><span class="icon"><i class="fas fa-file-pdf"></i></span><span>Paper</span></a></span>
+            <span class="link-block"><a href="https://arxiv.org/abs/2412.09774" class="external-link button is-normal is-rounded is-dark"><span class="icon"><i class="ai ai-arxiv"></i></span><span>arXiv</span></a></span>
+            <span class="link-block"><a href="https://github.com/JerryHoTaiwan/DeepWaveOptics" class="external-link button is-normal is-rounded is-dark"><span class="icon"><i class="fab fa-github"></i></span><span>Code</span></a></span>
           </div>
         </div>
       </div>
@@ -143,48 +105,236 @@
   </div>
 </section>
 
-<section class="hero teaser">
+<!-- ===== TEASER ===== -->
+<section class="hero hero-teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
       <div class="has-text-centered">
-        <img src="./static/images/DiffWave.png" alt="Teaser Image" style="width: 80%; height: auto;" />
+        <img src="./static/images/DiffWave.png" alt="Teaser Image" style="width:80%;height:auto;" />
       </div>
-      <h2 class="subtitle has-text-centered">
-        End-to-end optimized lens architectures and reconstruction models using ray and wave optics.
-      </h2>
+      <h2 class="subtitle has-text-centered">End-to-end optimized lens architectures and reconstruction models using ray and wave optics.</h2>
     </div>
   </div>
 </section>
 
-
+<!-- ===== ABSTRACT ===== -->
 <section class="section">
   <div class="container is-max-desktop">
-    <!-- Abstract. -->
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
+        <h2 class="title is-3 section-title">Abstract</h2>
+        <div class="content has-text-justified is-narrow-text">
           <p>
-            End-to-end optimization, which integrates differentiable optics simulators with computational algorithms, 
-            enables the joint design of hardware and software for data-driven imaging systems. However, existing 
-            methods usually compromise physical accuracy by neglecting wave optics or off-axis effects due to the 
-            high computational cost of modeling both aberration and diffraction. This limitation raises concerns 
-            about the robustness of optimized designs. In this paper, we propose a differentiable optics simulator 
-            that accurately and efficiently models aberration and diffraction in compound optics and allows us to 
-            analyze the role and impact of diffraction in end-to-end optimization. Experimental results demonstrate 
-            that compared with ray-optics-based optimization, diffraction-aware optimization improves system 
-            robustness to diffraction blur. Through accurate wave optics modeling, we also apply the simulator 
-            to optimize the Fizeau interferometer and freeform optics elements. These findings underscore 
-            the importance of accurate wave optics modeling in robust end-to-end optimization. 
+            End-to-end optimization, which integrates differentiable optics simulators with computational algorithms,
+            enables the joint design of hardware and software for data-driven imaging systems. However, existing
+            methods usually compromise physical accuracy by neglecting wave optics or off-axis effects due to the
+            high computational cost of modeling both aberration and diffraction. This limitation raises concerns
+            about the robustness of optimized designs. In this paper, we propose a differentiable optics simulator
+            that accurately and efficiently models aberration and diffraction in compound optics and allows us to
+            analyze the role and impact of diffraction in end-to-end optimization. Experimental results demonstrate
+            that compared with ray-optics-based optimization, diffraction-aware optimization improves system
+            robustness to diffraction blur. Through accurate wave optics modeling, we also apply the simulator
+            to optimize the Fizeau interferometer and freeform optics elements.
           </p>
         </div>
       </div>
     </div>
-    <!--/ Abstract. -->
   </div>
 </section>
 
+<!-- ===== (a) PRIOR WORK + PIPELINE ===== -->
+<a id="overview" class="anchor-gap"></a>
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 section-title">What prior work does • Our simulation pipeline</h2>
+    <p class="section-subtitle">A brief positioning and a schematic of our differentiable wave-optics pipeline.</p>
+    <div class="columns is-variable is-6">
+      <div class="column">
+        <div class="content">
+          <h3 class="title is-5">Prior approaches</h3>
+          <ul>
+            <li><strong>Ray-only end-to-end</strong>: Efficient, but ignores diffraction & off-axis phase — fragile under aperture/NA changes.</li>
+            <li><strong>Paraxial/PSF approximations</strong>: Capture limited diffraction with stationarity assumptions; accuracy drops for compound optics and field curvature.</li>
+            <li><strong>Non-differentiable wave solvers</strong>: Accurate but slow, preventing gradient-based co-design.</li>
+          </ul>
+          <p>We combine <em>aberration-aware</em> field tracing with <em>diffraction-aware</em> propagation to retain physical fidelity while keeping gradients fast.</p>
+        </div>
+      </div>
+      <div class="column">
+        <div class="card elevated">
+          <div class="card-image">
+            <figure class="image is-3by2">
+              <!-- replace with your pipeline figure (SVG/PNG) -->
+              <img src="./static/images/pipeline.svg" alt="Differentiable wave-optics pipeline" />
+            </figure>
+          </div>
+          <div class="card-content">
+            <p class="img-caption">Schematic: (1) Field tracing through lens group → (2) Diffraction propagation → (3) Sensor image → (4) Loss → (5) Gradients to optics & algorithm.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- ===== (b) RESULTS: COMPETITORS VS OURS ===== -->
+<a id="results" class="anchor-gap"></a>
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 section-title">Results: competitors vs ours</h2>
+    <p class="section-subtitle">Quantitative metrics and side-by-side comparisons. Replace placeholders with your actual numbers/assets.</p>
+
+    <!-- Quantitative table -->
+    <div class="table-container">
+      <table class="table is-striped is-fullwidth is-hoverable">
+        <thead>
+          <tr>
+            <th>Method</th>
+            <th>PSNR ↑</th>
+            <th>SSIM ↑</th>
+            <th>Robustness to diffraction blur ↑</th>
+            <th>Runtime (s) ↓</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Ray-only E2E</td>
+            <td>--</td><td>--</td><td>--</td><td>--</td>
+          </tr>
+          <tr>
+            <td>Hybrid (paraxial PSF)</td>
+            <td>--</td><td>--</td><td>--</td><td>--</td>
+          </tr>
+          <tr>
+            <td><strong>Ours (diffraction-aware)</strong></td>
+            <td><span class="tag is-info is-light metric-tag">+Δ</span>--</td>
+            <td><span class="tag is-info is-light metric-tag">+Δ</span>--</td>
+            <td><span class="tag is-success is-light metric-tag">best</span>--</td>
+            <td>--</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Qualitative carousel -->
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <div class="card elevated">
+          <div class="card-content">
+            <h3 class="title is-5">Qualitative comparisons</h3>
+            <div class="carousel" data-autoplay="true" data-loop="true">
+              <div class="item">
+                <figure class="image">
+                  <img src="./static/results/scene1_sideby_side.png" alt="Scene 1: Ray-only vs Hybrid vs Ours" />
+                </figure>
+                <p class="img-caption">Scene 1 • Ray-only (left), Hybrid (mid), Ours (right).</p>
+              </div>
+              <div class="item">
+                <figure class="image">
+                  <img src="./static/results/scene2_sideby_side.png" alt="Scene 2: comparison" />
+                </figure>
+                <p class="img-caption">Scene 2 • Improved contrast and fine detail with diffraction-aware design.</p>
+              </div>
+              <div class="item">
+                <figure class="image">
+                  <img src="./static/results/scene3_sideby_side.png" alt="Scene 3: comparison" />
+                </figure>
+                <p class="img-caption">Scene 3 • Robustness under smaller aperture (diffraction-limited regime).</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== (c) SIMULATOR GALLERY: PSFs & IMAGES ===== -->
+<a id="gallery" class="anchor-gap"></a>
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 section-title">Simulator gallery: PSFs & generated images</h2>
+    <p class="section-subtitle">A peek into physically-accurate PSFs and image formation from our simulator.</p>
+
+    <div class="columns is-variable is-6">
+      <div class="column">
+        <div class="card elevated">
+          <div class="card-content">
+            <h3 class="title is-5">PSF examples (on/off-axis)</h3>
+            <div class="carousel" data-autoplay="true" data-loop="true">
+              <div class="item"><img src="./static/psf/psf_onaxis.png" alt="On-axis PSF" /><p class="img-caption">On-axis PSF.</p></div>
+              <div class="item"><img src="./static/psf/psf_offaxis_1.png" alt="Off-axis PSF 1" /><p class="img-caption">Off-axis PSF (field curvature/astigmatism).</p></div>
+              <div class="item"><img src="./static/psf/psf_offaxis_2.png" alt="Off-axis PSF 2" /><p class="img-caption">Off-axis PSF (coma/tilt).</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="card elevated">
+          <div class="card-content">
+            <h3 class="title is-5">Image formation</h3>
+            <div class="carousel" data-autoplay="true" data-loop="true">
+              <div class="item"><img src="./static/ifm/im1.png" alt="Image formation example 1" /><p class="img-caption">Natural scene through optimized optics.</p></div>
+              <div class="item"><img src="./static/ifm/im2.png" alt="Image formation example 2" /><p class="img-caption">Resolution chart, contrast transfer preserved.</p></div>
+              <div class="item"><img src="./static/ifm/im3.png" alt="Image formation example 3" /><p class="img-caption">Low-light target with diffraction-aware design.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== (d) EVOLVING LENS ARCHITECTURES ===== -->
+<a id="evolution" class="anchor-gap"></a>
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 section-title">Evolving lens architectures over iterations</h2>
+    <p class="section-subtitle">Short animations illustrating how the optimizer morphs lens groups and improves image quality.</p>
+
+    <div class="columns is-variable is-6">
+      <div class="column is-half">
+        <h3 class="title is-6">Lens layout evolution</h3>
+        <div class="video-wrapper">
+          <!-- Replace with your exported MP4/WebM; keep muted+loop for autoplay on most browsers. -->
+          <video autoplay muted loop playsinline>
+            <source src="./static/videos/lens_evolution.mp4" type="video/mp4" />
+            <source src="./static/videos/lens_evolution.webm" type="video/webm" />
+          </video>
+        </div>
+        <p class="img-caption">Frames sampled along optimization iterations (e.g., every 25 steps). <a href="./static/videos/lens_evolution.mp4" download>Download MP4</a></p>
+      </div>
+
+      <div class="column is-half">
+        <h3 class="title is-6">PSF / image quality over time</h3>
+        <div class="video-wrapper">
+          <video autoplay muted loop playsinline>
+            <source src="./static/videos/quality_over_iters.mp4" type="video/mp4" />
+            <source src="./static/videos/quality_over_iters.webm" type="video/webm" />
+          </video>
+        </div>
+        <p class="img-caption">Left: PSF sharpening • Right: validation image PSNR/SSIM trends. <a href="./static/videos/quality_over_iters.mp4" download>Download MP4</a></p>
+      </div>
+    </div>
+
+    <!-- Optional: a tiny scrubber demo using a sequence of PNGs (drop in /static/evolution/frame_XXX.png) -->
+    <div class="box">
+      <div class="level">
+        <div class="level-left"><h3 class="title is-6">Scrub iterations</h3></div>
+        <div class="level-right" style="min-width: 280px;">
+          <input id="evo-range" class="slider is-fullwidth is-info" step="1" min="0" max="99" value="0" type="range" />
+        </div>
+      </div>
+      <figure class="image is-16by9">
+        <img id="evo-img" src="./static/evolution/frame_000.png" alt="Iteration 0" />
+      </figure>
+      <p class="img-caption">Provide <code>frame_000.png</code> … <code>frame_099.png</code> under <code>static/evolution/</code>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BIBTEX ===== -->
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
@@ -197,37 +347,68 @@
   </div>
 </section>
 
-
+<!-- ===== FOOTER ===== -->
 <footer class="footer">
   <div class="container">
     <div class="content has-text-centered">
-      <a class="icon-link" href="https://arxiv.org/abs/2412.09774" class="external-link" disabled>
-        <i class="fas fa-file-pdf"></i>
-      </a>
-      <a class="icon-link" href="https://github.com/JerryHoTaiwan" class="external-link" disabled>
-        <i class="fab fa-github"></i>
-      </a>
+      <a class="icon-link" href="https://arxiv.org/abs/2412.09774" class="external-link"><i class="fas fa-file-pdf"></i></a>
+      <a class="icon-link" href="https://github.com/JerryHoTaiwan" class="external-link"><i class="fab fa-github"></i></a>
     </div>
     <div class="columns is-centered">
       <div class="column is-8">
         <div class="content">
           <p>
-            This website is licensed under a <a rel="license"
-                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
             Commons Attribution-ShareAlike 4.0 International License</a>.
           </p>
           <p>
-            This means you are free to borrow the <a
-              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
-            we just ask that you link back to this page in the footer.
-            Please remember to remove the analytics code included in the header of the website which
-            you do not want on your website.
+            You may borrow the <a href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website; please link back to this page in the footer.
           </p>
         </div>
       </div>
     </div>
   </div>
 </footer>
+
+<!-- ===== PAGE SCRIPTS ===== -->
+<script>
+  // Navbar burger for mobile
+  document.addEventListener('DOMContentLoaded', () => {
+    const burgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+    burgers.forEach(b => {
+      b.addEventListener('click', () => {
+        const target = document.querySelector('.navbar-menu');
+        b.classList.toggle('is-active');
+        target.classList.toggle('is-active');
+      });
+    });
+  });
+
+  // Init all carousels
+  document.addEventListener('DOMContentLoaded', () => {
+    if (window.bulmaCarousel) {
+      bulmaCarousel.attach('.carousel', {
+        slidesToScroll: 1,
+        slidesToShow: 1,
+        autoplay: true,
+        loop: true,
+        pauseOnHover: true
+      });
+    }
+  });
+
+  // Simple scrubber for iteration PNG sequence
+  (function(){
+    const rng = document.getElementById('evo-range');
+    const img = document.getElementById('evo-img');
+    if(!rng || !img) return;
+    rng.addEventListener('input', () => {
+      const k = String(rng.value).padStart(3,'0');
+      img.src = `./static/evolution/frame_${k}.png`;
+      img.alt = `Iteration ${rng.value}`;
+    });
+  })();
+</script>
 
 </body>
 </html>
