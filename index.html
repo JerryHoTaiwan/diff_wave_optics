@@ -308,48 +308,100 @@
 <section class="section">
   <div class="container is-max-desktop">
     <h2 class="title is-3 section-title">Evolving lens architectures over iterations</h2>
-    <p class="section-subtitle">Short animations illustrating how the optimizer morphs lens groups and improves image quality.</p>
+    <p class="section-subtitle">Three synchronized views: lens configuration, PSF, and rendered image — as the optimizer iterates.</p>
 
+    <!-- Row of three autoplay videos -->
     <div class="columns is-variable is-6">
-      <div class="column is-half">
+      <div class="column">
         <h3 class="title is-6">Lens layout evolution</h3>
         <div class="video-wrapper">
-          <!-- Replace with your exported MP4/WebM; keep muted+loop for autoplay on most browsers. -->
           <video autoplay muted loop playsinline>
             <source src="./static/videos/lens_evolution.mp4" type="video/mp4" />
             <source src="./static/videos/lens_evolution.webm" type="video/webm" />
           </video>
         </div>
-        <p class="img-caption">Frames sampled along optimization iterations (e.g., every 25 steps). <a href="./static/videos/lens_evolution.mp4" download>Download MP4</a></p>
+        <p class="img-caption">Exported from <code>lens_000.png …</code></p>
       </div>
 
-      <div class="column is-half">
-        <h3 class="title is-6">PSF / image quality over time</h3>
+      <div class="column">
+        <h3 class="title is-6">PSF evolution</h3>
         <div class="video-wrapper">
           <video autoplay muted loop playsinline>
-            <source src="./static/videos/quality_over_iters.mp4" type="video/mp4" />
-            <source src="./static/videos/quality_over_iters.webm" type="video/webm" />
+            <source src="./static/videos/psf_evolution.mp4" type="video/mp4" />
+            <source src="./static/videos/psf_evolution.webm" type="video/webm" />
           </video>
         </div>
-        <p class="img-caption">Left: PSF sharpening • Right: validation image PSNR/SSIM trends. <a href="./static/videos/quality_over_iters.mp4" download>Download MP4</a></p>
+        <p class="img-caption">From <code>psf_000.png …</code></p>
+      </div>
+
+      <div class="column">
+        <h3 class="title is-6">Image evolution</h3>
+        <div class="video-wrapper">
+          <video autoplay muted loop playsinline>
+            <source src="./static/videos/img_evolution.mp4" type="video/mp4" />
+            <source src="./static/videos/img_evolution.webm" type="video/webm" />
+          </video>
+        </div>
+        <p class="img-caption">From <code>img_000.png …</code></p>
       </div>
     </div>
 
-    <!-- Optional: a tiny scrubber demo using a sequence of PNGs (drop in /static/evolution/frame_XXX.png) -->
+    <!-- Synced scrubber using three raw frame sequences -->
     <div class="box">
       <div class="level">
         <div class="level-left"><h3 class="title is-6">Scrub iterations</h3></div>
         <div class="level-right" style="min-width: 280px;">
-          <input id="evo-range" class="slider is-fullwidth is-info" step="1" min="0" max="99" value="0" type="range" />
+          <!-- Adjust max= to your last index (e.g., 0..179 -> max=179) -->
+          <input id="evo-range-3" class="slider is-fullwidth is-info" step="1" min="0" max="99" value="0" type="range" />
         </div>
       </div>
-      <figure class="image is-16by9">
-        <img id="evo-img" src="./static/evolution/frame_000.png" alt="Iteration 0" />
-      </figure>
-      <p class="img-caption">Provide <code>frame_000.png</code> … <code>frame_099.png</code> under <code>static/evolution/</code>.</p>
+
+      <div class="columns is-variable is-4">
+        <div class="column">
+          <figure class="image is-16by9">
+            <img id="evo-lens" src="./static/evolution/lens_000.png" alt="Lens config — iter 0" />
+          </figure>
+          <p class="img-caption has-text-centered">Lens configuration</p>
+        </div>
+        <div class="column">
+          <figure class="image is-16by9">
+            <img id="evo-psf" src="./static/evolution/psf_000.png" alt="PSF — iter 0" />
+          </figure>
+          <p class="img-caption has-text-centered">PSF</p>
+        </div>
+        <div class="column">
+          <figure class="image is-16by9">
+            <img id="evo-img" src="./static/evolution/img_000.png" alt="Rendered image — iter 0" />
+          </figure>
+          <p class="img-caption has-text-centered">Rendered image</p>
+        </div>
+      </div>
+
+      <p class="img-caption">Provide synchronized sequences: <code>lens_000.png</code>, <code>psf_000.png</code>, <code>img_000.png</code> … in <code>static/evolution/</code>. Set the slider’s <code>max</code> to your last frame index.</p>
     </div>
   </div>
 </section>
+
+<!-- Inline script to sync the scrubber -->
+<script>
+(function(){
+  const pad3 = k => String(k).padStart(3,'0');
+  const rng  = document.getElementById('evo-range-3');
+  const lens = document.getElementById('evo-lens');
+  const psf  = document.getElementById('evo-psf');
+  const img  = document.getElementById('evo-img');
+  if (!rng || !lens || !psf || !img) return;
+  rng.addEventListener('input', () => {
+    const k = pad3(rng.value);
+    lens.src = `./static/evolution/lens_${k}.png`;
+    psf.src  = `./static/evolution/psf_${k}.png`;
+    img.src  = `./static/evolution/img_${k}.png`;
+    lens.alt = `Lens config — iter ${rng.value}`;
+    psf.alt  = `PSF — iter ${rng.value}`;
+    img.alt  = `Rendered image — iter ${rng.value}`;
+  });
+})();
+</script>
 
   <!-- ===== ACKNOWLEDGMENTS ===== -->
   <section class="section ack-section">
