@@ -310,39 +310,47 @@
     <h2 class="title is-3 section-title">Evolving lens architectures over iterations</h2>
     <p class="section-subtitle">Three synchronized views: lens configuration, PSF, and rendered image — as the optimizer iterates.</p>
 
+    <!-- Local styles (scoped to this block) -->
+    <style>
+      /* Show full video without cropping; keep original aspect */
+      .video-box { background:#000; border-radius:12px; overflow:hidden; box-shadow:0 8px 24px rgba(0,0,0,.08); }
+      .video-box video { display:block; width:100%; height:auto; object-fit:contain; }
+
+      /* Center scrubber images vertically and keep native sizes */
+      .vgrid .vcenter-cell { display:flex; flex-direction:column; align-items:center; justify-content:center; }
+      .vgrid img.scrub-img { display:block; margin:0 auto; max-width:100%; height:auto; }
+    </style>
+
     <!-- Row of three autoplay videos -->
     <div class="columns is-variable is-6">
       <div class="column">
         <h3 class="title is-6">Lens layout evolution</h3>
-        <div class="video-wrapper">
+        <div class="video-box">
           <video autoplay muted loop playsinline>
             <source src="./static/videos/lens_evolution.mp4" type="video/mp4" />
             <source src="./static/videos/lens_evolution.webm" type="video/webm" />
           </video>
         </div>
-        <p class="img-caption">Exported from <code>layout/lens_000.png …</code></p>
       </div>
 
       <div class="column">
         <h3 class="title is-6">PSF evolution</h3>
-        <div class="video-wrapper">
+        <div class="video-box">
           <video autoplay muted loop playsinline>
             <source src="./static/videos/psf_evolution.mp4" type="video/mp4" />
             <source src="./static/videos/psf_evolution.webm" type="video/webm" />
           </video>
         </div>
-        <p class="img-caption">From <code>psfs/psf_000.png …</code></p>
       </div>
 
       <div class="column">
         <h3 class="title is-6">Image evolution</h3>
-        <div class="video-wrapper">
+        <div class="video-box">
           <video autoplay muted loop playsinline>
             <source src="./static/videos/img_evolution.mp4" type="video/mp4" />
             <source src="./static/videos/img_evolution.webm" type="video/webm" />
           </video>
         </div>
-        <p class="img-caption">From <code>imgs/img_000.png …</code></p>
       </div>
     </div>
 
@@ -351,30 +359,27 @@
       <div class="level">
         <div class="level-left"><h3 class="title is-6">Scrub iterations</h3></div>
         <div class="level-right" style="min-width: 280px;">
-          <!-- Adjust max= to your last index (e.g., 0..179 -> max=179) -->
+          <!-- Set max to your last frame index (e.g., 179) -->
           <input id="evo-range-3" class="slider is-fullwidth is-info" step="1" min="0" max="99" value="0" type="range" />
         </div>
       </div>
 
-      <div class="columns is-variable is-4">
-        <div class="column has-text-centered">
-          <img id="evo-lens" src="./static/evolution/layout/lens_000.png" alt="Lens config — iter 0" />
+      <div class="columns vgrid is-variable is-4 is-vcentered">
+        <div class="column vcenter-cell has-text-centered">
+          <img id="evo-lens" class="scrub-img" src="./static/evolution/layout/lens_000.png" alt="Lens config — iter 0" />
           <p class="img-caption">Lens configuration</p>
         </div>
-        <div class="column has-text-centered">
-          <img id="evo-psf" src="./static/evolution/psfs/psf_000.png" alt="PSF — iter 0" />
+        <div class="column vcenter-cell has-text-centered">
+          <img id="evo-psf" class="scrub-img" src="./static/evolution/psfs/psf_000.png" alt="PSF — iter 0" />
           <p class="img-caption">PSF</p>
         </div>
-        <div class="column has-text-centered">
-          <img id="evo-img" src="./static/evolution/imgs/img_000.png" alt="Rendered image — iter 0" />
+        <div class="column vcenter-cell has-text-centered">
+          <img id="evo-img" class="scrub-img" src="./static/evolution/imgs/img_000.png" alt="Rendered image — iter 0" />
           <p class="img-caption">Rendered image</p>
         </div>
       </div>
 
-      <p class="img-caption">
-        Provide synchronized sequences under <code>static/evolution/layout/</code>, <code>static/evolution/psfs/</code>, and <code>static/evolution/imgs/</code>. 
-        Adjust the slider’s <code>max</code> to your frame count.
-      </p>
+      <p class="img-caption">Use the slider to scrub optimization iterations.</p>
     </div>
   </div>
 </section>
