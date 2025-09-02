@@ -320,7 +320,7 @@
             <source src="./static/videos/lens_evolution.webm" type="video/webm" />
           </video>
         </div>
-        <p class="img-caption">Exported from <code>lens_000.png …</code></p>
+        <p class="img-caption">Exported from <code>layout/lens_000.png …</code></p>
       </div>
 
       <div class="column">
@@ -331,7 +331,7 @@
             <source src="./static/videos/psf_evolution.webm" type="video/webm" />
           </video>
         </div>
-        <p class="img-caption">From <code>psf_000.png …</code></p>
+        <p class="img-caption">From <code>psfs/psf_000.png …</code></p>
       </div>
 
       <div class="column">
@@ -342,7 +342,7 @@
             <source src="./static/videos/img_evolution.webm" type="video/webm" />
           </video>
         </div>
-        <p class="img-caption">From <code>img_000.png …</code></p>
+        <p class="img-caption">From <code>imgs/img_000.png …</code></p>
       </div>
     </div>
 
@@ -352,32 +352,29 @@
         <div class="level-left"><h3 class="title is-6">Scrub iterations</h3></div>
         <div class="level-right" style="min-width: 280px;">
           <!-- Adjust max= to your last index (e.g., 0..179 -> max=179) -->
-          <input id="evo-range-3" class="slider is-fullwidth is-info" step="1" min="0" max="297" value="0" type="range" />
+          <input id="evo-range-3" class="slider is-fullwidth is-info" step="1" min="0" max="99" value="0" type="range" />
         </div>
       </div>
 
       <div class="columns is-variable is-4">
-        <div class="column">
-          <figure class="image is-16by9">
-            <img id="evo-lens" src="./static/evolution/layout/lens_000.png" alt="Lens config — iter 0" />
-          </figure>
-          <p class="img-caption has-text-centered">Lens configuration</p>
+        <div class="column has-text-centered">
+          <img id="evo-lens" src="./static/evolution/layout/lens_000.png" alt="Lens config — iter 0" />
+          <p class="img-caption">Lens configuration</p>
         </div>
-        <div class="column">
-          <figure class="image is-16by9">
-            <img id="evo-psf" src="./static/evolution/psfs/psf_000.png" alt="PSF — iter 0" />
-          </figure>
-          <p class="img-caption has-text-centered">PSF</p>
+        <div class="column has-text-centered">
+          <img id="evo-psf" src="./static/evolution/psfs/psf_000.png" alt="PSF — iter 0" />
+          <p class="img-caption">PSF</p>
         </div>
-        <div class="column">
-          <figure class="image is-16by9">
-            <img id="evo-img" src="./static/evolution/imgs/img_000.png" alt="Rendered image — iter 0" />
-          </figure>
-          <p class="img-caption has-text-centered">Rendered image</p>
+        <div class="column has-text-centered">
+          <img id="evo-img" src="./static/evolution/imgs/img_000.png" alt="Rendered image — iter 0" />
+          <p class="img-caption">Rendered image</p>
         </div>
       </div>
 
-      <p class="img-caption">Provide synchronized sequences: <code>lens_000.png</code>, <code>psf_000.png</code>, <code>img_000.png</code> … in <code>static/evolution/</code>. Set the slider’s <code>max</code> to your last frame index.</p>
+      <p class="img-caption">
+        Provide synchronized sequences under <code>static/evolution/layout/</code>, <code>static/evolution/psfs/</code>, and <code>static/evolution/imgs/</code>. 
+        Adjust the slider’s <code>max</code> to your frame count.
+      </p>
     </div>
   </div>
 </section>
@@ -393,9 +390,9 @@
   if (!rng || !lens || !psf || !img) return;
   rng.addEventListener('input', () => {
     const k = pad3(rng.value);
-    lens.src = `./static/evolution/lens_${k}.png`;
-    psf.src  = `./static/evolution/psf_${k}.png`;
-    img.src  = `./static/evolution/img_${k}.png`;
+    lens.src = `./static/evolution/layout/lens_${k}.png`;
+    psf.src  = `./static/evolution/psfs/psf_${k}.png`;
+    img.src  = `./static/evolution/imgs/img_${k}.png`;
     lens.alt = `Lens config — iter ${rng.value}`;
     psf.alt  = `PSF — iter ${rng.value}`;
     img.alt  = `Rendered image — iter ${rng.value}`;
