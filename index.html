@@ -186,73 +186,30 @@
     </div>
   </section>
 
-<!-- ===== (b) RESULTS: COMPETITORS VS OURS ===== -->
+<!-- ===== (b) RESULTS: SINGLE-FIGURE COMPARISON ===== -->
 <a id="results" class="anchor-gap"></a>
 <section class="section">
   <div class="container is-max-desktop">
-    <h2 class="title is-3 section-title">Results: competitors vs ours</h2>
-    <p class="section-subtitle">Quantitative metrics and side-by-side comparisons. Replace placeholders with your actual numbers/assets.</p>
+    <h2 class="title is-3 section-title">Results: single-figure comparison</h2>
+    <p class="section-subtitle">
+      Array view comparing reference PSFs with competitors and ours.
+    </p>
 
-    <!-- Quantitative table -->
-    <div class="table-container">
-      <table class="table is-striped is-fullwidth is-hoverable">
-        <thead>
-          <tr>
-            <th>Method</th>
-            <th>PSNR ↑</th>
-            <th>SSIM ↑</th>
-            <th>Robustness to diffraction blur ↑</th>
-            <th>Runtime (s) ↓</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Ray-only E2E</td>
-            <td>--</td><td>--</td><td>--</td><td>--</td>
-          </tr>
-          <tr>
-            <td>Hybrid (paraxial PSF)</td>
-            <td>--</td><td>--</td><td>--</td><td>--</td>
-          </tr>
-          <tr>
-            <td><strong>Ours (diffraction-aware)</strong></td>
-            <td><span class="tag is-info is-light metric-tag">+Δ</span>--</td>
-            <td><span class="tag is-info is-light metric-tag">+Δ</span>--</td>
-            <td><span class="tag is-success is-light metric-tag">best</span>--</td>
-            <td>--</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Qualitative carousel -->
-    <div class="columns is-centered">
-      <div class="column is-10">
-        <div class="card elevated">
-          <div class="card-content">
-            <h3 class="title is-5">Qualitative comparisons</h3>
-            <div class="carousel" data-autoplay="true" data-loop="true">
-              <div class="item">
-                <figure class="image">
-                  <img src="./static/results/scene1_sideby_side.png" alt="Scene 1: Ray-only vs Hybrid vs Ours" />
-                </figure>
-                <p class="img-caption">Scene 1 • Ray-only (left), Hybrid (mid), Ours (right).</p>
-              </div>
-              <div class="item">
-                <figure class="image">
-                  <img src="./static/results/scene2_sideby_side.png" alt="Scene 2: comparison" />
-                </figure>
-                <p class="img-caption">Scene 2 • Improved contrast and fine detail with diffraction-aware design.</p>
-              </div>
-              <div class="item">
-                <figure class="image">
-                  <img src="./static/results/scene3_sideby_side.png" alt="Scene 3: comparison" />
-                </figure>
-                <p class="img-caption">Scene 3 • Robustness under smaller aperture (diffraction-limited regime).</p>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div class="card elevated">
+      <div class="card-image results-figure">
+        <figure class="image">
+          <!-- Replace with your single array/grid figure -->
+          <img src="./static/images/psf_cmp.pdf"
+               alt="Grid comparison of PSFs: Reference vs Ray-only vs Hybrid vs Ours" />
+        </figure>
+      </div>
+      <div class="card-content">
+        <p class="img-caption">
+          <strong>PSFs rendered by different simulators under different conditions.</strong> 
+          Unlike existing simulators, ours avoids on-grid wavefront discretization and remains robust to defocus and large FoVs, 
+          achieving the highest accuracy and efficiency. The tuple (SSIM, ray count, time in sec.) highlights the best performance in red. 
+          As the Airy disk does not use ray-tracing, we skip its ray count and do not compare its time with others. Zoom in for details.
+        </p>
       </div>
     </div>
   </div>
