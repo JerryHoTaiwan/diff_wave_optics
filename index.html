@@ -215,41 +215,76 @@
   </div>
 </section>
 
-<!-- ===== (c) SIMULATOR GALLERY: PSFs & IMAGES ===== -->
+<!-- ===== (c) SIMULATOR GALLERY: LENSES, PSFs & IMAGES ===== -->
 <a id="gallery" class="anchor-gap"></a>
 <section class="section">
   <div class="container is-max-desktop">
-    <h2 class="title is-3 section-title">Simulator gallery: PSFs & generated images</h2>
-    <p class="section-subtitle">A peek into physically-accurate PSFs and image formation from our simulator.</p>
+    <h2 class="title is-3 section-title">Simulator gallery: lens configurations, PSFs & images</h2>
+    <p class="section-subtitle">
+      Comparing a single spherical lens and a complex aspheric lens. Each panel shows the lens configuration, its on/off-axis PSFs, and the corresponding rendered image.
+    </p>
 
     <div class="columns is-variable is-6">
+      <!-- Single spherical lens -->
       <div class="column">
         <div class="card elevated">
           <div class="card-content">
-            <h3 class="title is-5">PSF examples (on/off-axis)</h3>
-            <div class="carousel" data-autoplay="true" data-loop="true">
-              <div class="item"><img src="./static/psf/psf_onaxis.png" alt="On-axis PSF" /><p class="img-caption">On-axis PSF.</p></div>
-              <div class="item"><img src="./static/psf/psf_offaxis_1.png" alt="Off-axis PSF 1" /><p class="img-caption">Off-axis PSF (field curvature/astigmatism).</p></div>
-              <div class="item"><img src="./static/psf/psf_offaxis_2.png" alt="Off-axis PSF 2" /><p class="img-caption">Off-axis PSF (coma/tilt).</p></div>
-            </div>
+            <h3 class="title is-5">Single spherical lens</h3>
+
+            <figure class="image">
+              <img src="./static/lens/spherical_config.png" alt="Configuration of single spherical lens" />
+              <p class="img-caption">Lens configuration (spherical).</p>
+            </figure>
+
+            <figure class="image">
+              <img src="./static/psf/spherical_onaxis.png" alt="Spherical lens on-axis PSF" />
+              <p class="img-caption">On-axis PSF (spherical lens).</p>
+            </figure>
+
+            <figure class="image">
+              <img src="./static/psf/spherical_offaxis.png" alt="Spherical lens off-axis PSF" />
+              <p class="img-caption">Off-axis PSF (spherical lens, field-dependent aberrations).</p>
+            </figure>
+
+            <figure class="image">
+              <img src="./static/ifm/spherical_image.png" alt="Rendered image spherical lens" />
+              <p class="img-caption">Rendered image through the spherical lens.</p>
+            </figure>
           </div>
         </div>
       </div>
+
+      <!-- Complex aspheric lens -->
       <div class="column">
         <div class="card elevated">
           <div class="card-content">
-            <h3 class="title is-5">Image formation</h3>
-            <div class="carousel" data-autoplay="true" data-loop="true">
-              <div class="item"><img src="./static/ifm/im1.png" alt="Image formation example 1" /><p class="img-caption">Natural scene through optimized optics.</p></div>
-              <div class="item"><img src="./static/ifm/im2.png" alt="Image formation example 2" /><p class="img-caption">Resolution chart, contrast transfer preserved.</p></div>
-              <div class="item"><img src="./static/ifm/im3.png" alt="Image formation example 3" /><p class="img-caption">Low-light target with diffraction-aware design.</p></div>
-            </div>
+            <h3 class="title is-5">Complex aspheric lens</h3>
+
+            <figure class="image">
+              <img src="./static/lens/aspheric_config.png" alt="Configuration of complex aspheric lens" />
+              <p class="img-caption">Lens configuration (aspheric).</p>
+            </figure>
+
+            <figure class="image">
+              <img src="./static/psf/aspheric_onaxis.png" alt="Aspheric lens on-axis PSF" />
+              <p class="img-caption">On-axis PSF (aspheric lens).</p>
+            </figure>
+
+            <figure class="image">
+              <img src="./static/psf/aspheric_offaxis.png" alt="Aspheric lens off-axis PSF" />
+              <p class="img-caption">Off-axis PSF (aspheric lens, reduced aberrations).</p>
+            </figure>
+
+            <figure class="image">
+              <img src="./static/ifm/aspheric_image.png" alt="Rendered image aspheric lens" />
+              <p class="img-caption">Rendered image through the aspheric lens.</p>
+            </figure>
           </div>
         </div>
       </div>
     </div>
-
   </div>
+</section>
 </section>
 
 <!-- ===== (d) EVOLVING LENS ARCHITECTURES ===== -->
