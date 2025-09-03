@@ -313,61 +313,126 @@
     <!-- Scoped styles just for this block -->
     <style>
       /* Equalize media height across image + videos */
-      .evo-row { --media-h: 320px; }               /* default height */
-      @media (max-width: 768px) { .evo-row { --media-h: 220px; } }   /* smaller on mobile */
-      @media (min-width: 1216px) { .evo-row { --media-h: 360px; } }  /* larger on wide screens */
+      .evo-row { --media-h: 320px; }
+      @media (max-width: 768px) { .evo-row { --media-h: 220px; } }
+      @media (min-width: 1216px) { .evo-row { --media-h: 360px; } }
 
       .evo-row .cell {
         display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;
       }
 
-      /* Apply the same height to both image and video; keep aspect with object-fit:contain */
       .evo-row .thumb,
       .evo-row video {
         display:block;
         height: var(--media-h);
-        width: auto;            /* keep aspect ratio */
-        max-width: 100%;        /* don’t overflow narrow columns */
-        object-fit: contain;    /* no cropping */
+        width: auto;
+        max-width: 100%;
+        object-fit: contain;
         border-radius: 12px;
         box-shadow: 0 8px 24px rgba(0,0,0,.08);
       }
 
       .evo-row .caption { margin-top: .5rem; font-size: 0.9rem; opacity: .85; }
-</style>
+
+      /* Toolbar */
+      .evo-controls { margin-top:.75rem; display:flex; gap:.5rem; align-items:center; justify-content:center; flex-wrap:wrap; }
+    </style>
 
     <div class="columns is-variable is-6 evo-row">
       <!-- Left: Reference scene (static) -->
       <div class="column cell">
         <h3 class="title is-6">Reference scene</h3>
-        <img class="thumb"
-             src="./static/images/reference_scene.png"
-             alt="Reference scene" />
+        <img class="thumb" src="./static/images/reference_scene.png" alt="Reference scene" />
         <div class="caption">Ground-truth/target image used for evaluation.</div>
       </div>
 
-      <!-- Middle: Lens animation -->
+      <!-- Middle: Lens animation (with native controls) -->
       <div class="column cell">
         <h3 class="title is-6">Lens layout evolution</h3>
-        <video autoplay muted loop playsinline>
+        <video id="vid-lens" controls playsinline>
           <source src="./static/videos/lens_evolution.mp4" type="video/mp4" />
           <source src="./static/videos/lens_evolution.webm" type="video/webm" />
         </video>
         <div class="caption">Optimizer morphs lens groups over iterations.</div>
       </div>
 
-      <!-- Right: Recovered image animation -->
+      <!-- Right: Recovered image animation (with native controls) -->
       <div class="column cell">
         <h3 class="title is-6">Image recovery evolution</h3>
-        <video autoplay muted loop playsinline>
+        <video id="vid-img" controls playsinline>
           <source src="./static/videos/img_evolution.mp4" type="video/mp4" />
           <source src="./static/videos/img_evolution.webm" type="video/webm" />
         </video>
         <div class="caption">Reconstruction quality improves across iterations.</div>
       </div>
     </div>
+
+    <!-- Optional: unified toolbar that controls both videos -->
+    <div class="evo-controls">
+      <button id="evo-play" class="button is-small is-info">Play</button>
+      <button id="evo-pause" class="button is-small">Pause</button>
+      <button id="evo-restart" class="button is-small">Restart</button>
+
+      <label style="display:flex; align-items:center; gap:.35rem;">
+        Speed
+        <select id="evo-speed" class="select is-small">
+          <option value="0.5">0.5×</option>
+          <option value="0.75">0.75×</option>
+          <option value="1" selected>1×</option>
+          <option value="1.5">1.5×</option>
+          <option value="2">2×</option>
+        </select>
+      </label>
+
+      <label class="checkbox" style="margin-left:.5rem;">
+        <input id="evo-mute" type="checkbox" /> Muted
+      </label>
+
+      <label class="checkbox" style="margin-left:.5rem;">
+        <input id="evo-sync" type="checkbox" checked /> Sync
+      </label>
+    </div>
   </div>
 </section>
+
+<!-- Tiny script for the unified toolbar -->
+<script>
+(function(){
+  const v1 = document.getElementById('vid-lens');
+  const v2 = document.getElementById('vid-img');
+  if (!v1 || !v2) return;
+
+  const btnPlay   = document.getElementById('evo-play');
+  const btnPause  = document.getElementById('evo-pause');
+  const btnRestart= document.getElementById('evo-restart');
+  const selSpeed  = document.getElementById('evo-speed');
+  const cbMute    = document.getElementById('evo-mute');
+  const cbSync    = document.getElementById('evo-sync');
+
+  function playAll(){ v1.play(); v2.play(); }
+  function pauseAll(){ v1.pause(); v2.pause(); }
+  function restartAll(){ v1.currentTime = 0; v2.currentTime = 0; playAll(); }
+
+  function setRate(r){ v1.playbackRate = r; v2.playbackRate = r; }
+  function setMute(m){ v1.muted = m; v2.muted = m; }
+
+  if (btnPlay)    btnPlay.addEventListener('click', playAll);
+  if (btnPause)   btnPause.addEventListener('click', pauseAll);
+  if (btnRestart) btnRestart.addEventListener('click', restartAll);
+  if (selSpeed)   selSpeed.addEventListener('change', e => setRate(parseFloat(e.target.value)));
+  if (cbMute)     cbMute.addEventListener('change', e => setMute(e.target.checked));
+
+  // Simple sync loop (keeps vids within ~50ms when playing)
+  function syncTick(){
+    if (cbSync && cbSync.checked && !v1.paused && !v2.paused) {
+      const dt = v1.currentTime - v2.currentTime;
+      if (Math.abs(dt) > 0.05) v2.currentTime = v1.currentTime;
+    }
+    requestAnimationFrame(syncTick);
+  }
+  requestAnimationFrame(syncTick);
+})();
+</script>
 
   <!-- ===== ACKNOWLEDGMENTS ===== -->
   <section class="section ack-section">
