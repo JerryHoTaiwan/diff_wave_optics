@@ -308,84 +308,54 @@
 <section class="section">
   <div class="container is-max-desktop">
     <h2 class="title is-3 section-title">Evolving lens architectures over iterations</h2>
-    <p class="section-subtitle">Two synchronized views: lens configuration and recovered image — as the optimizer iterates.</p>
+    <p class="section-subtitle">Reference scene alongside lens configuration and recovered image animations.</p>
 
-    <!-- Local styles (scoped to this block) -->
+    <!-- Scoped styles just for this block -->
     <style>
-      .video-box { background:#000; border-radius:12px; overflow:hidden; box-shadow:0 8px 24px rgba(0,0,0,.08);
-                   display:flex; align-items:center; justify-content:center; }
-      .video-box video { display:block; max-width:100%; height:auto; object-fit:contain; }
-
-      .vgrid .vcenter-cell { display:flex; flex-direction:column; align-items:center; justify-content:center; }
-      .vgrid img.scrub-img { display:block; margin:0 auto; max-width:100%; height:auto; }
+      .evo-row .cell {
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        text-align: center;
+      }
+      .evo-row .thumb,
+      .evo-row video {
+        display: block; max-width: 100%; height: auto; object-fit: contain;
+        border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,.08);
+      }
+      .evo-row .caption { margin-top: .5rem; font-size: 0.9rem; opacity: .85; }
     </style>
 
-    <!-- Row of two autoplay videos -->
-    <div class="columns is-variable is-6 vgrid">
-      <div class="column vcenter-cell has-text-centered">
+    <div class="columns is-variable is-6 evo-row">
+      <!-- Left: Reference scene (static) -->
+      <div class="column cell">
+        <h3 class="title is-6">Reference scene</h3>
+        <img class="thumb"
+             src="./static/images/reference_scene.png"
+             alt="Reference scene" />
+        <div class="caption">Ground-truth/target image used for evaluation.</div>
+      </div>
+
+      <!-- Middle: Lens animation -->
+      <div class="column cell">
         <h3 class="title is-6">Lens layout evolution</h3>
-        <div class="video-box">
-          <video autoplay muted loop playsinline>
-            <source src="./static/videos/lens_evolution.mp4" type="video/mp4" />
-            <source src="./static/videos/lens_evolution.webm" type="video/webm" />
-          </video>
-        </div>
+        <video autoplay muted loop playsinline>
+          <source src="./static/videos/lens_evolution.mp4" type="video/mp4" />
+          <source src="./static/videos/lens_evolution.webm" type="video/webm" />
+        </video>
+        <div class="caption">Optimizer morphs lens groups over iterations.</div>
       </div>
 
-      <div class="column vcenter-cell has-text-centered">
+      <!-- Right: Recovered image animation -->
+      <div class="column cell">
         <h3 class="title is-6">Image recovery evolution</h3>
-        <div class="video-box">
-          <video autoplay muted loop playsinline>
-            <source src="./static/videos/img_evolution.mp4" type="video/mp4" />
-            <source src="./static/videos/img_evolution.webm" type="video/webm" />
-          </video>
-        </div>
+        <video autoplay muted loop playsinline>
+          <source src="./static/videos/img_evolution.mp4" type="video/mp4" />
+          <source src="./static/videos/img_evolution.webm" type="video/webm" />
+        </video>
+        <div class="caption">Reconstruction quality improves across iterations.</div>
       </div>
-    </div>
-
-    <!-- Synced scrubber using two raw frame sequences -->
-    <div class="box">
-      <div class="level">
-        <div class="level-left"><h3 class="title is-6">Scrub iterations</h3></div>
-        <div class="level-right" style="min-width: 280px;">
-          <!-- Set max= to your last frame index -->
-          <input id="evo-range-2" class="slider is-fullwidth is-info" step="1" min="0" max="150" value="0" type="range" />
-        </div>
-      </div>
-
-      <div class="columns vgrid is-variable is-4 is-vcentered">
-        <div class="column vcenter-cell has-text-centered">
-          <img id="evo-lens" class="scrub-img" src="./static/evolution/layout/lens_000.png" alt="Lens config — iter 0" />
-          <p class="img-caption">Lens configuration</p>
-        </div>
-        <div class="column vcenter-cell has-text-centered">
-          <img id="evo-img" class="scrub-img" src="./static/evolution/imgs/img_000.png" alt="Image recovery — iter 0" />
-          <p class="img-caption">Image recovery</p>
-        </div>
-      </div>
-
-      <p class="img-caption">Use the slider to scrub optimization iterations.</p>
     </div>
   </div>
 </section>
-
-<!-- Inline script to sync the scrubber -->
-<script>
-(function(){
-  const pad3 = k => String(k).padStart(3,'0');
-  const rng  = document.getElementById('evo-range-2');
-  const lens = document.getElementById('evo-lens');
-  const img  = document.getElementById('evo-img');
-  if (!rng || !lens || !img) return;
-  rng.addEventListener('input', () => {
-    const k = pad3(rng.value);
-    lens.src = `./static/evolution/layout/lens_${k}.png`;
-    img.src  = `./static/evolution/imgs/img_${k}.png`;
-    lens.alt = `Lens config — iter ${rng.value}`;
-    img.alt  = `Image recovery — iter ${rng.value}`;
-  });
-})();
-</script>
 
   <!-- ===== ACKNOWLEDGMENTS ===== -->
   <section class="section ack-section">
