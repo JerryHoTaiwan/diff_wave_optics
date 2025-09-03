@@ -303,59 +303,30 @@
   }
 </style>
 
-<!-- ===== (d) EVOLVING LENS ARCHITECTURES ===== -->
-<a id="evolution" class="anchor-gap"></a>
-<section class="section">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3 section-title">Evolving lens architectures over iterations</h2>
-    <p class="section-subtitle">Reference scene alongside lens configuration and recovered image animations.</p>
+<style>
+  /* Equalize media height across image + videos */
+  .evo-row { --media-h: 320px; }               /* default height */
+  @media (max-width: 768px) { .evo-row { --media-h: 220px; } }   /* smaller on mobile */
+  @media (min-width: 1216px) { .evo-row { --media-h: 360px; } }  /* larger on wide screens */
 
-    <!-- Scoped styles just for this block -->
-    <style>
-      .evo-row .cell {
-        display: flex; flex-direction: column; align-items: center; justify-content: center;
-        text-align: center;
-      }
-      .evo-row .thumb,
-      .evo-row video {
-        display: block; max-width: 100%; height: auto; object-fit: contain;
-        border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,.08);
-      }
-      .evo-row .caption { margin-top: .5rem; font-size: 0.9rem; opacity: .85; }
-    </style>
+  .evo-row .cell {
+    display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;
+  }
 
-    <div class="columns is-variable is-6 evo-row">
-      <!-- Left: Reference scene (static) -->
-      <div class="column cell">
-        <h3 class="title is-6">Reference scene</h3>
-        <img class="thumb"
-             src="./static/images/reference_scene.png"
-             alt="Reference scene" />
-        <div class="caption">Ground-truth/target image used for evaluation.</div>
-      </div>
+  /* Apply the same height to both image and video; keep aspect with object-fit:contain */
+  .evo-row .thumb,
+  .evo-row video {
+    display:block;
+    height: var(--media-h);
+    width: auto;            /* keep aspect ratio */
+    max-width: 100%;        /* don’t overflow narrow columns */
+    object-fit: contain;    /* no cropping */
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.08);
+  }
 
-      <!-- Middle: Lens animation -->
-      <div class="column cell">
-        <h3 class="title is-6">Lens layout evolution</h3>
-        <video autoplay muted loop playsinline>
-          <source src="./static/videos/lens_evolution.mp4" type="video/mp4" />
-          <source src="./static/videos/lens_evolution.webm" type="video/webm" />
-        </video>
-        <div class="caption">Optimizer morphs lens groups over iterations.</div>
-      </div>
-
-      <!-- Right: Recovered image animation -->
-      <div class="column cell">
-        <h3 class="title is-6">Image recovery evolution</h3>
-        <video autoplay muted loop playsinline>
-          <source src="./static/videos/img_evolution.mp4" type="video/mp4" />
-          <source src="./static/videos/img_evolution.webm" type="video/webm" />
-        </video>
-        <div class="caption">Reconstruction quality improves across iterations.</div>
-      </div>
-    </div>
-  </div>
-</section>
+  .evo-row .caption { margin-top: .5rem; font-size: 0.9rem; opacity: .85; }
+</style>
 
   <!-- ===== ACKNOWLEDGMENTS ===== -->
   <section class="section ack-section">
